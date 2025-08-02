@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Punto de Venta{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">🧾 Caja Abierta</h1>
+
+  <form method="POST" class="space-y-4">
+    {% csrf_token %}
+    <label for="codigo" class="block text-sm font-medium text-gray-700">Código del producto:</label>
+    <input type="text" name="codigo" id="codigo" autofocus
+      class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder="Escaneá o escribí el código...">
+
+    <button type="submit"
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-150">
+      ➕ Agregar a la venta
+    </button>
+  </form>
+
+  <hr class="my-6">
+
+  <div class="bg-white shadow rounded-lg p-4">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">🛒 Detalle de la venta:</h2>
+    
+    {% if carrito %}
+      <ul class="space-y-2">
+        {% for item in carrito %}
+          <li class="flex justify-between text-gray-700 border-b pb-2">
+            <span>{{ item.producto.nombre }} (x{{ item.cantidad }})</span>
+            <span>${{ item.total }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      <div class="text-right mt-4">
+        <h3 class="text-lg font-bold text-green-600">Total: ${{ total }}</h3>
+        <button
+          class="mt-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition duration-150">
+          💸 Cobrar
+        </button>
+      </div>
+    {% else %}
+      <p class="text-gray-500">No hay productos cargados.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

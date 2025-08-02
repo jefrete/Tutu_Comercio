@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Inicio - Tutu_Comercio</title>
-</head>
-<body>
-    <h1>¡Bienvenido a Tutu_Comercio!</h1>
-    <p>Esto es la vista de inicio funcionando desde la app <strong>core</strong>.</p>
-</body>
-</html>
+{% extends "core/base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <h1 class="display-4">Tutu_Comercio</h1>
+        <p class="lead">Sistema de gestión universal conectado y listo para laburar</p>
+    </div>
+{% endblock %}

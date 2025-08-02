@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Venta Realizada{% endblock %}
+{% load mis_filtros %}
+<td>{{ item.cantidad|multiply:item.producto.precio }}</td>
+
+{% block content %}
+<h1>Comprobante de Venta #{{ venta.id }}</h1>
+
+<table border="1">
+    <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Total</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.producto.nombre }}</td>
+        <td>{{ item.cantidad }}</td>
+        <td>${{ item.precio_unitario }}</td>
+        <td>${{ item.cantidad|multiply:item.precio_unitario }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total: ${{ total }}</h3>
+
+<a href="{% url 'crear_venta' %}">Volver a ventas</a>
+{% endblock %}
